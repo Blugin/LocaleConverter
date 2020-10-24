@@ -1,6 +1,6 @@
 ---
 name: locale-converter
-antigen: blugin\lib\converter\locale
+antigen: kim\present\converter\locale
 version: 1.0.1
 api: 3.0.0
 authors: [PresentKim, Blugin-team]
