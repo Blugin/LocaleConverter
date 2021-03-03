@@ -23,11 +23,14 @@
  * @noinspection PhpIllegalPsrClassPathInspection
  * @noinspection SpellCheckingInspection
  * @noinspection PhpDocSignatureInspection
+ * @noinspection PhpUnused
  */
 
 declare(strict_types=1);
 
 namespace kim\present\converter\locale;
+
+use function array_flip;
 
 final class LocaleConverter{
     private function __construct(){
@@ -78,7 +81,17 @@ final class LocaleConverter{
     ];
 
     /** @return string|null the locale name converted from IETF_language_tag to ISO_639-3 code */
-    public static function convertIEFT(string $ietf) : ?string{
-        return self::LANGUAGES_MAP[$ietf] ?? null;
+    public static function convertIEFT(string $tag) : ?string{
+        return self::LANGUAGES_MAP[$tag] ?? null;
+    }
+
+    /** @return string|null the locale name converted from ISO_639-3 code to IETF_language_tag */
+    public static function convertCode(string $code) : ?string{
+        static $flippedMap;
+        if(empty($flippedMap)){
+            $flippedMap = array_flip(self::LANGUAGES_MAP);
+        }
+
+        return $flippedMap[$code] ?? null;
     }
 }
